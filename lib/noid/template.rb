@@ -25,7 +25,7 @@ module Noid
       return @validation_regexp if @validation_regexp
       pattern_list = ['\A', '(', Regexp.escape(prefix), '(']
       if generator == 'z'
-        pattern_list << character_to_pattern(@character_list.last) << '*'
+        pattern_list << character_to_pattern(@character_list.first) << '*'
       end
       @character_list.each do |c|
         pattern_list << character_to_pattern(c)
@@ -166,7 +166,7 @@ module Noid
       end.compact.join('')
 
       if generator == 'z'
-        size = size_list.last
+        size = size_list.first
         while n > 0
           value = n % size
           n = n / size
