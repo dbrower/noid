@@ -82,11 +82,12 @@ describe Noid::Minter do
     minter.mint.should == "003f3m"
   end
 
-  it "should mint sequential digits plus check char, with new digits added as needed" do
-    minter = Noid::Minter.new(:template => ".zdeek")
-    minter.mint.should == "0000"
-    minter.mint.should == "0013"
-    (10*29*29-2).times { minter.mint.should =~ /^\d\w\w\w$/ }
+  it "should mint sequential digits plus check char, with new digits added as needed from the left" do
+    minter = Noid::Minter.new(:template => ".zdek")
+    minter.mint.should == "000"
+    minter.mint.should == "012"
+    (10*29-2).times { minter.mint.should =~ /^\d\w\w$/ }
+    (9*10*29).times { minter.mint.should =~ /^\d\d\w\w$/ }
     minter.mint.should == "10001"
   end
 
